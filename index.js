@@ -1,3 +1,5 @@
+
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -8,10 +10,10 @@ const cookieParser = require("cookie-parser");
 const { checkForAuthticationCookie } = require("./middleware/authtication.js");
 const Blog = require("./models/blog.js")
 
-const PORT = 8003;
+const PORT = process.env.PORT;
 
 // after giving port number 27017 we gave the name of our databse which is here blogify
-mongoose.connect("mongodb://localhost:27017/blogify").then( (e) => console.log("MongoDB Connected Successfully"));
+mongoose.connect(process.env.MONGO_URL).then( (e) => console.log("MongoDB Connected Successfully"));
 
 app.use(cookieParser());
 app.use(checkForAuthticationCookie("token"));
